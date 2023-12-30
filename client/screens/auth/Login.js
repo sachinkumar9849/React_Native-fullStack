@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 import {
   View,
   Text,
@@ -10,13 +12,13 @@ import {
 import InputBox from "../../components/forms/InputBox";
 import SubmitButton from "../../components/forms/SubmitButton";
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       setLoading(true);
       if (!email || !password) {
@@ -25,12 +27,26 @@ const Login = ({navigation}) => {
         return;
       }
       setLoading(false);
+      const { data } = await axios.post(
+        "http://192.168.101.4:8080/api/v1/auth/login",
+        { email, password }
+      );
+
+      await AsyncStorage.setItem("@auth", JSON.stringify(data));
+      alert(data && data.message);
       console.log("Login Data ==>", { email, password });
     } catch (error) {
+      alert(error.response.data.message);
       setLoading(false);
       console.log(error);
     }
   };
+  // tem function to check local storage data
+  const getLocalStorageData = async () => {
+    let data = await AsyncStorage.getItem("@auth");
+    console.log("Local Storage ===>", data);
+  };
+  getLocalStorageData();
 
   return (
     <View>
@@ -56,11 +72,13 @@ const Login = ({navigation}) => {
           btnTitle="Login"
           handleSubmit={handleSubmit}
           loading={loading}
-          
         />
         <Text style={{ textAlign: "center", marginTop: 10, fontSize: 20 }}>
           Not a user please
-          <Text style={{ fontWeight: "bold", color: "red", paddingLeft: 8 }} onPress={() => navigation.navigate('Register')}>
+          <Text
+            style={{ fontWeight: "bold", color: "red", paddingLeft: 8 }}
+            onPress={() => navigation.navigate("Register")}
+          >
             Register
           </Text>
         </Text>

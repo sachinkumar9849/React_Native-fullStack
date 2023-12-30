@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   View,
   Text,
@@ -16,7 +17,7 @@ const RegisterForm = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       setLoading(true);
       if (!name || !email || !password) {
@@ -25,8 +26,15 @@ const RegisterForm = ({ navigation }) => {
         return;
       }
       setLoading(false);
+      const { data } = await axios.post(
+        "http://192.168.101.4:8080/api/v1/auth/register",
+        { name, email, password }
+      );
+      alert(data && data.message);
       console.log("Register Data ==>", { name, email, password });
+      setName("")
     } catch (error) {
+      alert(error.response.data.message);
       setLoading(false);
       console.log(error);
     }
