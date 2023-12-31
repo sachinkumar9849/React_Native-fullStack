@@ -87,11 +87,10 @@ const loginController = async (req, res) => {
         message: "Invalid username or password",
       });
     }
-    // TOKEN JWT 
-    const token = await JWT.sign({_id:user._id},process.env.JWT_SECRET,{
-      expiresIn:"7d",
-
-    })
+    // TOKEN JWT
+    const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
     // undefined password
     user.password = undefined;
     res.status(200).send({
