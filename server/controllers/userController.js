@@ -108,5 +108,46 @@ const loginController = async (req, res) => {
     });
   }
 };
+//update user
+//update user
+const updateUserController = async (req, res) => {
+  try {
+    const { name, password, email } = req.body;
+    //user find
+    const user = await userModel.findOne({ email });
+    //password validate
+    if (password && password.length < 6) {
+      return res.status(400).send({
+        success: false,
+        message: "Password is required and should be 6 characters long",
+      });
+    }
+    const hashPasswordHelperUser = password
+      ? await hashPasswordHelper(password)
+      : undefined;
+    // updated users
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email },
+      {
+        name: name || user.name,
+        password: hashPasswordHelperUser || user.password,
+      },
+      { new: true }
+    );
+    updatedUser.password = undefined;
+    res.status(200).send({
+      success: true,
+      message: "Profile Updated Please Login",
+      updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In User Update API",
+      error,
+    });
+  }
+};
 
-module.exports = { registerController, loginController };
+module.exports = { registerController, loginController, updateUserController };

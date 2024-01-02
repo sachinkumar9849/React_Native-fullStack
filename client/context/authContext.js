@@ -13,8 +13,8 @@ const AuthProvider = ({ children }) => {
     token: "",
   });
 
-  // default axios setting 192.168.101.10
-  axios.defaults.baseURL = "http://192.168.101.10:8080/api/v1";
+  // default axios setting 
+  axios.defaults.baseURL = "http://192.168.101.12:8080/api/v1";
 
   // initial local storage data
   useEffect(() => {
