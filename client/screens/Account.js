@@ -15,7 +15,7 @@ import axios from "axios";
 const Account = () => {
   // global state
   const [state, setState] = useContext(AuthContext);
-  const { user,token } = state;
+  const { user, token } = state;
   const [name, setName] = useState(user?.name);
   const [email] = useState(user?.email);
   const [password, setPassword] = useState(user?.password);
@@ -42,7 +42,7 @@ const Account = () => {
   };
   return (
     <View style={styles.home_wrap}>
-      <ScrollView>
+      <View >
         <View style={{ display: "flex" }}>
           <Image
             source={{
@@ -85,7 +85,7 @@ const Account = () => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
 
       <View style={{ flex: 1, justifyContent: "flex-end" }}>
         <FooterMenu />

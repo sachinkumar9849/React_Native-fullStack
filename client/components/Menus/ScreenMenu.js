@@ -25,7 +25,7 @@ const ScreenMenu = () => {
             component={Home}
             options={{
               title: "Full Stack App",
-              headerRight: () => <HeaderMenu />,
+              
             }}
           />
           <Stack.Screen
@@ -33,7 +33,7 @@ const ScreenMenu = () => {
             component={Post}
             options={{
               headerBackTitle: "Back",
-              headerRight: () => <HeaderMenu />,
+             
             }}
           />
           <Stack.Screen
@@ -41,7 +41,7 @@ const ScreenMenu = () => {
             component={About}
             options={{
               headerBackTitle: "Back",
-              headerRight: () => <HeaderMenu />,
+             
             }}
           />
           <Stack.Screen
