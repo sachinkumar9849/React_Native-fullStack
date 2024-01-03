@@ -15,7 +15,7 @@ import axios from "axios";
 const Account = () => {
   // global state
   const [state, setState] = useContext(AuthContext);
-  const { user } = state;
+  const { user,token } = state;
   const [name, setName] = useState(user?.name);
   const [email] = useState(user?.email);
   const [password, setPassword] = useState(user?.password);
@@ -24,20 +24,19 @@ const Account = () => {
   // handle update user data
   const handleUpdate = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const { data } = await axios.put("/auth//update-user", {
         name,
         password,
         email,
       });
-      setLoading(true)
+      setLoading(true);
       let UD = JSON.stringify(data);
       setState({ ...state, user: UD?.updatedUser });
       alert(data && data.message);
     } catch (error) {
-      
       alert(error.response.data.message);
-      setLoading(false)
+      setLoading(false);
       console.log(error);
     }
   };
@@ -80,9 +79,11 @@ const Account = () => {
             value={state?.user.role}
             editable={false}
           />
-         <TouchableOpacity onPress={handleUpdate} style={styles.button}>
-        <Text style={styles.buttonText}>{loading?"Please Wait":"Update Profile"}</Text>
-      </TouchableOpacity>
+          <TouchableOpacity onPress={handleUpdate} style={styles.button}>
+            <Text style={styles.buttonText}>
+              {loading ? "Please Wait" : "Update Profile"}
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
@@ -99,10 +100,10 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    marginBottom:22,
+    marginBottom: 22,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     padding: 15,
     borderRadius: 5,
     marginTop: 10,
@@ -118,10 +119,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   buttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 16,
-   
   },
 });
 
