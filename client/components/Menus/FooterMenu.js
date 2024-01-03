@@ -23,17 +23,17 @@ const FooterMenu = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("About")}
+        onPress={() => navigation.navigate("Myposts")}
         style={styles.menuItem}
       >
         <View style={styles.iconContainer}>
           <Icon
-            color={route.name === "About" && "orange"}
-            name="info-circle"
+            color={route.name === "Myposts" && "orange"}
+            name="list"
             size={24}
           />
         </View>
-        <Text style={styles.text}>About</Text>
+        <Text style={styles.text}>Myposts</Text>
       </TouchableOpacity>
 
       <TouchableOpacity

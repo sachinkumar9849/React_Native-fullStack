@@ -7,17 +7,14 @@ const PostCard = ({ posts, showTime24Format }) => {
     <View style={styles.postItem}>
       <Text style={styles.postTitle}>{item.title}</Text>
       <Text>{item.description}</Text>
-      <Text style={{ color: "green", fontWeight: "bold", marginTop: 11 }}>
-        {item.postedBy.name}
-      </Text>
+      {item.postedBy.name && (
+        <Text style={styles.nameText}>{item.postedBy.name}</Text>
+      )}
       <Text style={{ color: "red" }}>
-        {moment(item.createdAt).format(
-          `DD-MM-YYYY`
-        )}
+        {moment(item.createdAt).format(`DD-MM-YYYY `)}
       </Text>
     </View>
   );
-  
 
   return (
     <View style={styles.postCardContainer}>
