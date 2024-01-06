@@ -9,9 +9,11 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  TextInput,
 } from "react-native";
 import FooterMenu from "../components/Menus/FooterMenu";
 import axios from "axios";
+
 const Account = () => {
   // global state
   const [state, setState] = useContext(AuthContext);
@@ -42,52 +44,59 @@ const Account = () => {
   };
   return (
     <View style={styles.home_wrap}>
-      <View >
-        <View style={{ display: "flex" }}>
-          <Image
-            source={{
-              uri: "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png",
-            }}
-            style={styles.image}
-          />
-          <Text>Currently You Can Only Update Your Name and Password</Text>
-        </View>
+      <ScrollView>
         <View style={styles.container}>
-          <Input
+          <View>
+            <Image
+              source={{
+                uri: "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png",
+              }}
+              style={styles.image}
+            />
+            <View style={{ marginBottom: 10 }}>
+              <Text>Currently You Can Only Update Your Name and Password</Text>
+            </View>
+          </View>
+          <TextInput
             label="Name"
             placeholder="Enter your name"
             value={name}
             onChangeText={(text) => setName(text)}
+            style={styles.input} // Add this line
           />
-          <Input
+          <TextInput
             label="Email"
             placeholder="Enter your email"
             value={state?.user.email}
             editable={false}
             keyboardType="email-address"
+            style={styles.input} // Add this line
           />
-          <Input
+          <TextInput
             label="Password"
             placeholder="Enter your password"
             value={password}
             onChangeText={(text) => setPassword(text)}
             secureTextEntry
+            style={styles.input} // Add this line
           />
-          <Input
+          <TextInput
             label="Role"
             placeholder="Enter your role"
             value={state?.user.role}
             editable={false}
+            style={styles.input} // Add this line
           />
+
           <TouchableOpacity onPress={handleUpdate} style={styles.button}>
             <Text style={styles.buttonText}>
               {loading ? "Please Wait" : "Update Profile"}
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
 
-      <View style={{ flex: 1, justifyContent: "flex-end" }}>
+      <View style={{ justifyContent: "flex-end" }}>
         <FooterMenu />
       </View>
     </View>
@@ -99,13 +108,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   container: {
-    alignItems: "center",
     marginBottom: 22,
+    padding: 20,
+   
+    backgroundColor: "white",
   },
   button: {
     backgroundColor: "blue",
     padding: 15,
-    borderRadius: 5,
+    
     marginTop: 10,
     width: "100%",
   },
@@ -115,13 +126,22 @@ const styles = StyleSheet.create({
     height: 100,
     marginBottom: 20,
   },
-  home_wrap: {
-    padding: 20,
-  },
+
   buttonText: {
     color: "white",
     textAlign: "center",
     fontSize: 16,
+  },
+  inputContainer: {
+    paddingLeft: 0, // Set the left padding to 0
+  },
+  input: {
+    height: 40,
+    borderColor: "#ddd", // Set border color
+    borderWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+    backgroundColor: "#fff", // Set background color
   },
 });
 

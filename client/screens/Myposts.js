@@ -1,7 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import PostCard from "../components/PostCard";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import FooterMenu from "../components/Menus/FooterMenu";
 import axios from "axios";
 const Myposts = () => {
@@ -28,13 +34,13 @@ const Myposts = () => {
 
   return (
     <View style={styles.home_wrap}>
-      <PostCard posts={posts} />
-      
-      <View style={{ flex: 1, justifyContent: "flex-end" }}>
+      <PostCard posts={posts} myPostScreen={true} />
+      <View style={{ justifyContent: "flex-end" }}>
         <FooterMenu />
       </View>
     </View>
   );
+  
 };
 const styles = StyleSheet.create({
   home_wrap: {

@@ -17,6 +17,6 @@ router.post("/register", registerController);
 // LOGIN || POST
 router.post("/login", loginController);
 // LOGIN || PUT
-router.put("/update-user",requireSingIn,updateUserController)
+router.put("/update-user", requireSingIn, updateUserController);
 // export
 module.exports = router;

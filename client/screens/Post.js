@@ -21,7 +21,7 @@ const Post = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const [posts ,setPosts] = useContext(PostContext)
+  const [posts, setPosts] = useContext(PostContext);
 
   const handleSubmit = async () => {
     try {
@@ -43,14 +43,12 @@ const Post = ({ navigation }) => {
       // Send a POST request to your API
       const response = await axios.post("/post/create-post", postData);
       setLoading(false);
-      setPosts([...posts, data?.post]);
+      setPosts([...posts, response.data?.post]); // Update this line
       Alert.alert("Post created successfully");
       // Handle the response from the API
       console.log("Post created successfully:", response.data);
 
       // Clear the form fields after successful submission
-     
- 
       navigation.navigate("Home");
       setTitle("");
       setDescription("");

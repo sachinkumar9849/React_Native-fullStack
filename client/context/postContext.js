@@ -14,7 +14,7 @@ const PostProvider = ({ children }) => {
     setLoading(true);
     try {
       const { data } = await axios.get("/post/get-all-post");
-      
+
       setLoading(false);
       setPosts(data?.posts);
     } catch (error) {
@@ -29,7 +29,7 @@ const PostProvider = ({ children }) => {
   }, []);
 
   return (
-    <PostContext.Provider value={[posts, setPosts]}>
+    <PostContext.Provider value={[posts, setPosts,getAllPosts]}>
       {children}
     </PostContext.Provider>
   );
